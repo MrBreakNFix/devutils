@@ -9,13 +9,13 @@
 	],
 	"contact": {
 		"homepage": "https://ui-utils.com/dev",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/MrBreakNFix/devutils"
 	},
 	"contributors": [
 		"FlorianMichael",
 		"Coderx_Gamer"
 	],
-	"license": "CC BY-NC-SA 4.0",
+	"license": "Attribution-NonCommercial-ShareAlike 4.0 International",
 	"icon": "assets/devutils/icon.png",
 	"environment": "*",
 	"entrypoints": {
