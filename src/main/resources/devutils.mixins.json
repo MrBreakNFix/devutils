@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "com.mrbreaknfix.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "MultiplayerScreenMixin",
+    "ClientPlayNetworkHandlerAccessor",
+    "HandledScreenMixin",
+    "InGameHudMixin",
+    "MinecraftClientMixin",
+    "SessionAccessor"
+  ],
+  "mixins": [
+    "ClientConnectionMixin"
+  ]
+}
