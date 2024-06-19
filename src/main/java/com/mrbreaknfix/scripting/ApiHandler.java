@@ -8,6 +8,7 @@ import com.mrbreaknfix.scripting.apis.*;
 import com.mrbreaknfix.scripting.apis.info.PlayerInfo;
 import com.mrbreaknfix.scripting.apis.info.ScreenInfo;
 import com.mrbreaknfix.scripting.apis.info.WSPort;
+import com.mrbreaknfix.scripting.apis.playeractions.Chat;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.apache.commons.io.IOUtils;
@@ -29,8 +30,12 @@ public class ApiHandler implements HttpHandler {
         apis.add(new ChatLog());
         apis.add(new WSPort());
 
+        // Info
         apis.add(new ScreenInfo());
         apis.add(new PlayerInfo());
+
+        // Player actions
+        apis.add(new Chat());
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.mrbreaknfix.event.EventManager;
 import com.mrbreaknfix.event.Sub;
+import com.mrbreaknfix.event.events.ChatMessageEvent;
 import com.mrbreaknfix.event.events.ScreenEvent;
 import com.mrbreaknfix.event.events.TickEvent;
 import com.mrbreaknfix.gui.windows.ServerInfoWindow;
@@ -76,6 +77,10 @@ public class Dev implements ModInitializer {
 		ws.send("screen:" + event.getClass().getSimpleName());
 	}
 
+	@Sub
+	public void onChatMsgReceived(ChatMessageEvent msg) {
+		ws.send("chat:" + msg);
+	}
 
 
 	public static String[] tailLogFile(int lastLines) {

@@ -1,6 +1,5 @@
 let running = false;
 
-
 function stopScript() {
     running = false;
     areEventsEnabled = false;
@@ -70,51 +69,74 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <category name="Logic" colour="#5C81A6">
                     <block type="controls_if"></block>
                     <block type="logic_compare"></block>
+                    <block type="logic_operation"></block>
+                    <block type="logic_negate"></block>
+                    <block type="logic_boolean"></block>
+                    <block type="logic_null"></block>
+                    <block type="logic_ternary"></block>
                 </category>
                 <category name="Math" colour="#5CA65C">
                     <block type="math_number"></block>
                     <block type="math_arithmetic"></block>
+                    <block type="string_length"></block>
+                    <block type="math_modulo"></block>
+                    <block type="math_random_int"></block>
+                    <block type="math_random_float"></block>
+                    <block type="math_round"></block>
                 </category>
                 <category name="Text" colour="#5CA68D">
                     <block type="text"></block>
                     <block type="text_join"></block>
                     <block type="string_value_of"></block>
-
                     <block type="text_print"></block>
+                    <block type="text_prompt_ext"></block>
+                    <block type="text_indexOf"></block>
+                    <block type="text_charAt"></block>
+                    <block type="text_getSubstring"></block>                    
                 </category>
                 <category name="Variables" colour="#A65C81">
                     <block type="variables_get"></block>
                     <block type="variables_set"></block>
-                </category>
-                <category name="Custom Blocks" colour="#A65CA6">
-                    <block type="string_length"></block>
-                    <block type="chatlog"></block>
                 </category>
                 <category name="Control" colour="#4C97D0">
                     <block type="controls_repeat_ext"></block>
                     <block type="controls_whileUntil"></block>
                     <block type="controls_for"></block>
                     <block type="controls_forEach"></block>
+                    <block type="controls_flow_statements"></block>
                 </category>
                 <category name="Functions" colour="#FFD500">
                     <block type="procedures_defreturn"></block>
                     <block type="procedures_defnoreturn"></block>
                     <block type="procedures_callreturn"></block>
                     <block type="procedures_callnoreturn"></block>
+                    <block type="procedures_ifreturn"></block>
                 </category>
                 <category name="Triggers / Events" colour="#FFAB19">
                     <block type="tick_events"></block>
                     <block type="screen_events"></block>
+                    <block type="chat_events"></block>
                 </category>
                 <category name="Web" colour="#FF6666">
                     <block type="end_script"></block>
                 </category>
-                <category name="Get Information" colour="#FF6666">
+                <category name="Player Information" colour="#FF6666">
                     <block type="player_pos"></block>
                 </category>
-                    
+                <category name="Player Actions" colour="#00FF00">
+                    <block type="chatlog"></block>
+                    <block type="chat"></block>
+                </category>
             </xml>
         `
+    });
+
+    // Load the workspace state from local storage
+    loadWorkspaceState(workspace);
+
+    // Save the workspace state to local storage on change
+    workspace.addChangeListener(() => {
+        saveWorkspaceState(workspace);
     });
 
     document.getElementById('toggleButton').addEventListener('click', () => {
@@ -127,6 +149,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     document.getElementById('clearButton').addEventListener('click', () => {
         workspace.clear();
+        saveWorkspaceState(workspace);
     });
 
     document.getElementById('importExportButton').addEventListener('click', () => {
@@ -212,3 +235,16 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+function saveWorkspaceState(workspace) {
+    const xml = Blockly.Xml.workspaceToDom(workspace);
+    const xmlText = Blockly.Xml.domToText(xml);
+    localStorage.setItem('workspaceState', xmlText);
+}
+
+function loadWorkspaceState(workspace) {
+    const xmlText = localStorage.getItem('workspaceState');
+    if (xmlText) {
+        const xml = Blockly.Xml.textToDom(xmlText);
+        Blockly.Xml.domToWorkspace(xml, workspace);
+    }
+}

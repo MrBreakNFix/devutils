@@ -1,14 +1,15 @@
-// player_pos.js
-
 // Define Blockly block for player position
 Blockly.Blocks['player_pos'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField('Player:')
+            .appendField('Player Pos:')
             .appendField(new Blockly.FieldDropdown([
-                ['x', 'x'],
-                ['y', 'y'],
-                ['z', 'z']
+                ['X', 'x'],
+                ['Y', 'y'],
+                ['Z', 'z'],
+                ['Block Pos: X', 'blockX'],
+                ['Block Pos: Y', 'blockY'],
+                ['Block Pos: Z', 'blockZ']
             ]), 'POS');
         this.setOutput(true, 'String');
         this.setColour(160);
@@ -16,10 +17,22 @@ Blockly.Blocks['player_pos'] = {
     }
 };
 
-// Define Blockly JavaScript generator function for player position block
 Blockly.JavaScript['player_pos'] = function(block) {
-    var pos = block.getFieldValue('POS');
-    // POST /api/playerinfo
+    const pos = block.getFieldValue('POS');
 
+    const code = `
+    (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/playerinfo', false); // synchronous request
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({ wants: '${pos}' }));
+        if (xhr.status === 200) {
+            return xhr.responseText;
+        } else {
+            throw new Error('Request failed: ' + xhr.status);
+        }
+    })()
+    `;
+
+    return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-

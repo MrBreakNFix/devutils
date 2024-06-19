@@ -26,6 +26,10 @@ public class PlayerInfo extends ApiBase {
             case "y" -> String.valueOf(mc.player.getY());
             case "z" -> String.valueOf(mc.player.getZ());
 
+            case "blockX" -> String.valueOf(mc.player.getBlockPos().getX());
+            case "blockY" -> String.valueOf(mc.player.getBlockPos().getY());
+            case "blockZ" -> String.valueOf(mc.player.getBlockPos().getZ());
+
             case "health" -> String.valueOf(mc.player.getHealth());
             case "dimension" -> mc.player.getEntityWorld().getRegistryKey().getValue().toString();
 
