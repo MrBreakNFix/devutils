@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevUtils</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="libs/blockly_compressed.min.js"></script>
+    <script src="libs/blocks_compressed.min.js"></script>
+    <script src="libs/en.min.js"></script>
+    <script src="libs/javascript_compressed.min.js"></script>
+
+    <link rel="icon" href="nerd.png" type="image/x-icon">
+    <link rel="shortcut icon" href="nerd.png" type="image/x-icon">
+</head>
+<body>
+<div id="blocklyDiv"></div>
+<div id="buttons">
+    <button id="toggleButton">Run Code</button>
+    <button id="importExportButton">Import / Export Code</button>
+
+    <button id="clearButton">Clear</button>
+</div>
+<pre id="codeOutput" class="hidden"></pre>
+
+<!--information about the player-->
+<div id="playerInfo">
+    <div id="playerInfoContent">
+        <h2>Player Info</h2>
+        <p>Player Name: <span id="playerName"></span></p>
+        <p>Player Health: <span id="playerHealth"></span></p>
+        <p>Player Hunger: <span id="playerHunger"></span></p>
+        <p>Player Thirst: <span id="playerThirst"></span></p>
+        <p>Player X: <span id="playerX"></span></p>
+        <p>Player Y: <span id="playerY"></span></p>
+        <p>Player Z: <span id="playerZ"></span></p>
+    </div>
+</div>
+
+<div id="popup" class="hidden">
+    <div id="popup-content">
+        <label for="workspaceCode"></label><textarea id="workspaceCode" placeholder="Paste your exported code here"></textarea>
+        <div>
+            <button id="saveToFileButton">Save to File</button>
+            <input type="file" id="loadFromFileInput" class="hidden">
+            <button id="loadFromFileButton">Load from File</button>
+        </div>
+        <button id="closePopupButton">Close</button>
+    </div>
+</div>
+
+<script src="blocks/string_length.js"></script>
+<script src="blocks/chat/chatlog.js"></script>
+<script src="blocks/listeners/tick_events.js"></script>
+<script src="blocks/listeners/screen_events.js"></script>
+
+<script src="blocks/web/end_script.js"></script>
+<script src="blocks/conversion/string_value_of.js"></script>
+<script src="blocks/text/text_join.js"></script>
+
+<script src="blocks/player/player_pos.js"></script>
+
+<script src="script.js"></script>
+<script src="listener.js"></script>
+</body>
+</html>
